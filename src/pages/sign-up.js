@@ -20,43 +20,43 @@ export default function SignUp() {
         event.preventDefault();
 
         const usernameExists = await doesUsernameExist(username);
-        // if (!usernameExists) {
-        //     try {
-        //         const createdUserResult = await firebase
-        //             .auth()
-        //             .createUserWithEmailAndPassword(emailAddress, password);
-        //
-        //         // authentication
-        //         // -> emailAddress & password & username (displayName)
-        //         await createdUserResult.user.updateProfile({
-        //             displayName: 'username'
-        //         });
-        //
-        //         // firebase user collection (create a document)
-        //         await firebase
-        //             .firestore()
-        //             .collection('users')
-        //             .add({
-        //                 userId: createdUserResult.user.uid,
-        //                 username: username.toLowerCase(),
-        //                 fullName,
-        //                 emailAddress: emailAddress.toLowerCase(),
-        //                 following: ['2'],
-        //                 followers: [],
-        //                 dateCreated: Date.now()
-        //             });
-        //
-        //         history.push(ROUTES.DASHBOARD);
-        //     } catch (error) {
-        //         setFullName('');
-        //         setEmailAddress('');
-        //         setPassword('');
-        //         setError(error.message);
-        //     }
-        // } else {
-        //     setUsername('');
-        //     setError('That username is already taken, please try another.');
-        // }
+        if (!usernameExists) {
+            try {
+                const createdUserResult = await firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(emailAddress, password);
+
+                // authentication
+                // -> emailAddress & password & username (displayName)
+                await createdUserResult.user.updateProfile({
+                    displayName: 'username'
+                });
+
+                // firebase user collection (create a document)
+                await firebase
+                    .firestore()
+                    .collection('users')
+                    .add({
+                        userId: createdUserResult.user.uid,
+                        username: username.toLowerCase(),
+                        fullName,
+                        emailAddress: emailAddress.toLowerCase(),
+                        following: ['2'],
+                        followers: [],
+                        dateCreated: Date.now()
+                    });
+
+                history.push(ROUTES.DASHBOARD);
+            } catch (error) {
+                setFullName('');
+                setEmailAddress('');
+                setPassword('');
+                setError(error.message);
+            }
+        } else {
+            setUsername('');
+            setError('That username is already taken, please try another.');
+        }
     };
 
     useEffect(() => {
@@ -74,7 +74,7 @@ export default function SignUp() {
                         <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12 mb-4" />
                     </h1>
 
-                    {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+                    {error && <p className="mb-4 text-xs text-red-600 ">{error}</p>}
 
                     <form onSubmit={handleSignUp} method="POST">
                         <input
