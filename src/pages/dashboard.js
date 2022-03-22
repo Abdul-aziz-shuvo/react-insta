@@ -4,7 +4,7 @@ import Header from "../components/header";
 
 const Dashboard = () => {
     return (
-        <div className='container '>
+        <div className=''>
             <Header />
             <Timeline />
         </div>

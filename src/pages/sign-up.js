@@ -30,7 +30,7 @@ export default function SignUp() {
                 // authentication
                 // -> emailAddress & password & username (displayName)
                 await createdUserResult.user.updateProfile({
-                    displayName: 'username'
+                    displayName: username
                 });
 
                 // firebase user collection (create a document)
