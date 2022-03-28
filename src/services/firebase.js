@@ -6,3 +6,11 @@ export async function doesUsernameExist(username){
         .where('username','==',username).get()
     return result.docs.map((user) => (user.data.length > 0 ))
 }
+export async function getFirebaseUserByUserId(userId){
+    const result = await firebase.firestore().collection('users')
+        .where('userId','==',userId).get()
+    return result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id
+    }))
+}

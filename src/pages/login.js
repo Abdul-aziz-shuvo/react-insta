@@ -2,19 +2,21 @@ import React, {useState, useEffect, useContext} from 'react';
 import FirebaseContext from "../context/firebase";
 import {useHistory,Link} from "react-router-dom";
 import * as Routes from  '../constants/routes'
+import {useAuth} from "../context/userContext";
 
 const Login = () => {
     const history = useHistory();
-    const {firebase} = useContext(FirebaseContext);
+    // const {firebase} = useContext(FirebaseContext);
+    const {signIn} = useAuth();
     const [emailAddress, setEmailAddress] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const isInvalid = password === "" || emailAddress === ""
     const handleLogin = async (e) => {
         e.preventDefault()
-        console.log()
+
         try {
-            await firebase.auth().signInWithEmailAndPassword(emailAddress,password);
+            await signIn(emailAddress,password);
             history.push(Routes.DASHBOARD)
         }catch (e) {
 
