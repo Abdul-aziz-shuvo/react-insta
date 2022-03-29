@@ -7,7 +7,7 @@ import {useAuth} from "../context/userContext";
 const Login = () => {
     const history = useHistory();
     // const {firebase} = useContext(FirebaseContext);
-    const {signIn} = useAuth();
+    const {signIn,errorFirebase} = useAuth();
     const [emailAddress, setEmailAddress] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -16,13 +16,19 @@ const Login = () => {
         e.preventDefault()
 
         try {
-            await signIn(emailAddress,password);
-            history.push(Routes.DASHBOARD)
+           const result =  await signIn(emailAddress,password);
+            console.log(result)
+               history.push(Routes.DASHBOARD)
+
+
+            // history.push(Routes.DASHBOARD)
         }catch (e) {
 
             setError(e.message)
         }
     }
+
+
 
     return (
         <div className='container flex mx-auto max-w-screen-md items-center h-screen justify-items-center'>

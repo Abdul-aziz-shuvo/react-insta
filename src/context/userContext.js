@@ -23,16 +23,21 @@ export const useAuth = () => {
 }
 export  const UserProvider = ({children}) => {
     const [user,setUser] = useState(localStorage.getItem('authUser') !== null ?  JSON.stringify(localStorage.getItem('authUser')) : null);
-
     const auth = getAuth()
     const history = useHistory()
     const signIn = (email, password) => {
-        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            console.log(userCredential)
+      return ( signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            //console.log(userCredential)
             setUser(userCredential.user)
             localStorage.setItem('authUser',JSON.stringify(userCredential.user))
-          history.push(ROUTES.DASHBOARD)
+
+              // history.push(ROUTES.DASHBOARD)
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+             return ( new Error( error.message) )
         })
+    )
     }
     const logOut = () => {
         signOut(auth).then(() => {
@@ -46,7 +51,8 @@ export  const UserProvider = ({children}) => {
     const values = {
         signIn,
         logOut,
-        user
+        user,
+
     }
 
 
