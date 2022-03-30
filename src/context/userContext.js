@@ -22,20 +22,19 @@ export const useAuth = () => {
     return useContext(UserContext)
 }
 export  const UserProvider = ({children}) => {
-    const [user,setUser] = useState(localStorage.getItem('authUser') !== null ?  JSON.stringify(localStorage.getItem('authUser')) : null);
+    const [user,setUser] = useState(localStorage.getItem('authUser') !== null ?  JSON.parse(localStorage.getItem('authUser')) : null);
     const auth = getAuth()
     const history = useHistory()
     const signIn = (email, password) => {
       return ( signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            //console.log(userCredential)
-            setUser(userCredential.user)
-            localStorage.setItem('authUser',JSON.stringify(userCredential.user))
-
-              // history.push(ROUTES.DASHBOARD)
+          setUser(userCredential.user)
+          localStorage.setItem('authUser',JSON.stringify(userCredential.user))
+          const signIn = true
+          return {signIn}
         }).catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
-             return ( new Error( error.message) )
+            const signIn = false
+            return {signIn,errorMessage}
         })
     )
     }
@@ -43,8 +42,6 @@ export  const UserProvider = ({children}) => {
         signOut(auth).then(() => {
             setUser(null)
             localStorage.removeItem('authUser')
-            // history.push(ROUTES.LOGIN)
-
         })
     }
 
@@ -52,7 +49,6 @@ export  const UserProvider = ({children}) => {
         signIn,
         logOut,
         user,
-
     }
 
 

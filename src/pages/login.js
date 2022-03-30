@@ -7,7 +7,7 @@ import {useAuth} from "../context/userContext";
 const Login = () => {
     const history = useHistory();
     // const {firebase} = useContext(FirebaseContext);
-    const {signIn,errorFirebase} = useAuth();
+    const {signIn} = useAuth();
     const [emailAddress, setEmailAddress] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -17,13 +17,15 @@ const Login = () => {
 
         try {
            const result =  await signIn(emailAddress,password);
-            console.log(result)
-               history.push(Routes.DASHBOARD)
 
+              if(result.signIn === false) {
+                  throw new Error(result.errorMessage);
+              }else{
+                  setError(null)
+                  history.push(Routes.DASHBOARD)
+              }
 
-            // history.push(Routes.DASHBOARD)
         }catch (e) {
-
             setError(e.message)
         }
     }
@@ -40,9 +42,9 @@ const Login = () => {
                   <img src="/images/logo.png" alt="" className='w-5/12 mb-2'/>
               </div>
 
-                <div>
+                <p className='text-rose-500'>
                     {error}
-                </div>
+                </p>
 
                 <form onSubmit={handleLogin} method='post' className='border p-4 '>
                     <input type="text" onChange={({target}) => setEmailAddress(target.value)} placeholder='Email Address' className='text-sm w-full mr-3 px-3 py-3 border rounded mb-2'/>

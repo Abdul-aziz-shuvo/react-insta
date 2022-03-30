@@ -7,17 +7,18 @@ const UseUser = () => {
     const [activeUser,setActiveUser] = useState();
     useEffect(() => {
       async function getUserByUserId () {
-          const {user} =   await getFirebaseUserByUserId(user.id)
-          setActiveUser(user)
+          const [response] =   await getFirebaseUserByUserId(user?.uid)
+
+          setActiveUser(response)
         }
 
-        if (user?.id){
+        if (user?.uid){
             getUserByUserId()
         }
 
-    },[user?.id])
+    },[user?.uid])
     return (
-        { user: activeUser, setActiveUser }
+        { user : activeUser }
     );
 };
 
