@@ -4,14 +4,15 @@ import Suggestion from "./suggestion";
 import useUser from "../../hooks/useUser";
 
 const Sidebar = () => {
-    const {user  : fullName,username,userId} = useUser()
-    useEffect(() => {
+    const {user}   = useUser()
 
-    },)
+    // useEffect(() => {
+    //     console.log(fullName)
+    // },[fullName])
     return (
         <div>
-           <User  fullname={fullName} username={username} userId={userId}/>
-            <Suggestion />
+           <User  fullname={user?.fullName} username={user?.username} />
+           <Suggestion userId={user?.userId}/>
         </div>
     );
 };

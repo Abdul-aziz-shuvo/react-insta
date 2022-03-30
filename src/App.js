@@ -21,16 +21,16 @@ function App() {
     // const { user } = useAuthListener();
   return (
       <Router>
-      <UserProvider >
-            <Suspense fallback={<p>loading...</p>}>
-              <Switch>
-                <Route path={ROUTES.LOGIN} component={Login} />
-                <Route path={ROUTES.SIGN_UP} component={Register} />
-                <Route path={ROUTES.DASHBOARD} component={Dashboard} />
-                <Route component={NotFound} />
-              </Switch>
-            </Suspense>
-      </UserProvider>
+          <UserProvider >
+                <Suspense fallback={<p>loading...</p>}>
+                  <Switch>
+                    <Route path={ROUTES.LOGIN} component={Login} />
+                    <Route path={ROUTES.SIGN_UP} component={Register} />
+                    <Route path={ROUTES.DASHBOARD} component={Dashboard} />
+                    <Route component={NotFound} />
+                  </Switch>
+                </Suspense>
+          </UserProvider>
       </Router>
 
   );
