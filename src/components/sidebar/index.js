@@ -6,11 +6,13 @@ import useUser from "../../hooks/useUser";
 const Sidebar = () => {
     const {user}   = useUser()
 
-    // useEffect(() => {
-    //     console.log(fullName)
-    // },[fullName])
+    useEffect(() => {
+        console.log(user)
+    },[])
+
+
     return (
-        <div>
+        <div className='flex flex-col items-center'>
            <User  fullname={user?.fullName} username={user?.username} />
            <Suggestion userId={user?.userId}/>
         </div>

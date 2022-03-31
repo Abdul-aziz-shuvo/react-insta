@@ -18,13 +18,14 @@ const UserContext = createContext(null);
 
 
 export const useAuth = () => {
-    console.log(useContext(UserContext))
+
     return useContext(UserContext)
 }
 export  const UserProvider = ({children}) => {
     const [user,setUser] = useState(localStorage.getItem('authUser') !== null ?  JSON.parse(localStorage.getItem('authUser')) : null);
     const auth = getAuth()
     const history = useHistory()
+
     const signIn = (email, password) => {
       return ( signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
           setUser(userCredential.user)
