@@ -4,12 +4,11 @@ import {getFirebaseUserByUserId} from "../services/firebase";
 
 const UseUser = () => {
     const {user} = useAuth()
-    console.log(user)
+
     const [activeUser,setActiveUser] = useState(null);
     useEffect(() => {
       async function getUserByUserId () {
           const [response] =   await getFirebaseUserByUserId(user?.uid)
-
           setActiveUser(response)
         }
 
@@ -17,7 +16,9 @@ const UseUser = () => {
             getUserByUserId()
         }
 
-    },[user?.uid])
+        console.log(activeUser)
+
+    },[user])
     return (
         { user : activeUser }
     );
