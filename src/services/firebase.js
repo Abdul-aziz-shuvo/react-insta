@@ -10,11 +10,11 @@ export async function getFirebaseUserByUserId(userId){
     const result = await firebase.firestore().collection('users')
         .where('userId','==',userId).get()
 
-
     const user =  result.docs.map((item) => ({
         ...item.data(),
         docId: item.id
     }))
+
 
    return user
 }
@@ -37,6 +37,9 @@ export async function updateFollowedUserFollower(userId,profileDocId){
             followers : FieldValue.arrayUnion(userId)
         })
 }
+
+
+
 export async function getPhotos(userId,following){
     const result =  await firebase.firestore().collection('photos')
         .where('userId', 'in' ,following).get()
@@ -45,5 +48,22 @@ export async function getPhotos(userId,following){
         ...photo.data(),
         docId : photo.id
     }))
-    return userFollowedPhotos;
+
+    //using promise.all here to result return as an array,otherwise it will return a promise
+    const  photoUserInfo = await Promise.all(userFollowedPhotos.map(async  (photo) => {
+        let username = '';
+        let userLike = false;
+        if(photo.likes.includes(userId)){
+            userLike = true
+        }
+
+        const response =   await getFirebaseUserByUserId(photo.userId)
+        username = response[0].username
+
+
+        return {username,user : photo,userLike}
+
+    }))
+
+    return  photoUserInfo;
 }

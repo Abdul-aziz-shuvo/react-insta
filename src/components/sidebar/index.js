@@ -10,7 +10,7 @@ const Sidebar = () => {
 
     },[user])
     return (
-        <div className=' mx-auto'>
+        <div className=' mx-auto   md:grid-cols-2 grid-cols-1 '>
            <User  fullname={user?.fullName} username={user?.username} />
            <Suggestion userId={user?.userId} loggedInUserDocId={user?.docId}  following={user?.following}/>
         </div>
