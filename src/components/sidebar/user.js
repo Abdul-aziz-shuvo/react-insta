@@ -16,7 +16,7 @@ const User = ({username,fullname}) => {
             )
             :
             (
-                <Link className=' grid grid-cols-4 gap-2'>
+                <Link to={`/p/${username}`} className=' grid grid-cols-4 gap-2'>
                     <div className=''>
                         <img src="/images/avatar.jpg" alt="" className=' w-14 h-14 rounded-full'/>
 
