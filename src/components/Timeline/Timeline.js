@@ -10,10 +10,7 @@ import Comment from "./post/comment";
 
 const Timeline = () => {
     const photos = usePhotos()
-    const commentInput = useRef();
-    const handleRef = () => {
-        commentInput.current.focus()
-    }
+
     useEffect(() => {
         console.log(photos)
     },[photos])
@@ -30,13 +27,7 @@ const Timeline = () => {
                     photos.length > 0 ?
                     photos.map((photo) => {
                         return (
-                            <Post>
-                                <Header username={photo.username}/>
-                                <Image docId={photo.user.docId} imgSrc={photo.user.imageSrc} />
-                                <Actions content={photo} method={handleRef}/>
-                                <Footer caption={photo.user.caption} username={photo.username}/>
-                                <Comment cmntRef={commentInput} comments={photo.user.comments}/>
-                            </Post>
+                            <Post photo={photo}></Post>
                         )
                     })
                         :

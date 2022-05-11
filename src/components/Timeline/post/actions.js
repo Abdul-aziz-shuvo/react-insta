@@ -54,7 +54,7 @@ const Actions = ({content,method}) => {
                 }
             </div>
             <div className=' mx-2'>
-                <img src={'/images/icons/comment.png'} alt="" className='w-6 h-6' onClick={() => (method())}/>
+                <img src={'/images/icons/comment.png'} alt="" className='w-6 h-6 cursor-pointer' onClick={() => (method())}/>
             </div>
             <div className=' mx-2'>
                 <img src={'/images/icons/send.png'} alt="" className='w-6 h-6'/>
