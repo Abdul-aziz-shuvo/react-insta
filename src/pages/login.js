@@ -19,13 +19,16 @@ const Login = () => {
            const result =  await signIn(emailAddress,password);
 
               if(result.signIn === false) {
+
                   throw new Error(result.errorMessage);
               }else{
+
                   setError(null)
                   history.push(Routes.DASHBOARD)
               }
 
         }catch (e) {
+
             setError(e.message)
         }
     }

@@ -8,7 +8,7 @@ const Header = ({username}) => {
             <Link to={`/p/${username}`}>
                 <div className='flex items-center gap-2'>
                     <div>
-                    <img src={`/images/avatars/${username}.jpg`}  className='rounded-full  h-8' alt=""/>
+                    <img src={`/images/avatars/${username}.jpg`}  className='rounded-full  h-8' alt="profile"/>
                     </div>
                     <div >
                         {username}

@@ -12,13 +12,13 @@ const Timeline = () => {
     const photos = usePhotos()
 
     useEffect(() => {
-        console.log(photos)
+
     },[photos])
     return (
         <div className=' container md:grid-cols-2
           grid-cols-1'>
             {
-               !photos  ? (
+               photos === null  ? (
                     <Skeleton count={4} width={600} height={300}>
 
                     </Skeleton>
@@ -35,6 +35,8 @@ const Timeline = () => {
 
 
             }
+
+
         </div>
     );
 };

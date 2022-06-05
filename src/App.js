@@ -1,10 +1,11 @@
-import {lazy,Suspense} from "react";
-import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
+import {lazy, Suspense} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import * as ROUTES from './constants/routes'
 import './App.css';
 import  {UserProvider} from "./context/userContext";
 import ProtectedRoute from "./helper/protectedRoute";
 import IsLoggedIn from "./helper/isloggedIn";
+import LoadingBar from "./components/loadingBar";
 
 
 
