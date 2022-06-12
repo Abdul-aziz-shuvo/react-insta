@@ -21,9 +21,11 @@ const Index = () => {
     );
 
     useEffect(() => {
+        console.log(state)
         async function getProfileInfoAndPhotos() {
             const [user] = await getUserByUserName(username);
             const photos = await getUserPhotoByUserName(username);
+            console.log(username)
             dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length,followingCount: user.following.length });
 
         }

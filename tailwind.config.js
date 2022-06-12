@@ -5,7 +5,16 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      display : ['group-hover']
+    },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
+  content: [
+    // ...
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
+  ]
+
 }

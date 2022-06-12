@@ -106,9 +106,14 @@ export async function handleFollowUnFollow(userId,userDocId,profileDocId,profile
 
     if(followExists){
       try{
-          const response =  await firebase.firestore().collection('users')
+            await firebase.firestore().collection('users')
               .doc(userDocId).update({
                   following : FieldValue.arrayRemove(profileUserId)
+              })
+
+          await firebase.firestore().collection('users')
+              .doc(profileDocId).update({
+                  followers : FieldValue.arrayRemove(userId)
               })
           return false
       }catch (e) {
@@ -119,11 +124,14 @@ export async function handleFollowUnFollow(userId,userDocId,profileDocId,profile
     }else{
 
        try{
-           const response =  await firebase.firestore().collection('users')
+            await firebase.firestore().collection('users')
                .doc(userDocId).update({
                    following : FieldValue.arrayUnion(profileUserId)
                })
-
+           await firebase.firestore().collection('users')
+               .doc(profileDocId).update({
+                   followers : FieldValue.arrayUnion(userId)
+               })
            return  true
        }catch (e) {
 
